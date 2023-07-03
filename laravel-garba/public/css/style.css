@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600&display=swap');
+
+
+
+*{
+  margin-left: 110px;
+  margin-right: 125px;
+  
+}
+.box{
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    width: 250px;
+}
+.form-container{
+    background-color: blue;
+    height: 520px;
+    border-radius: 10px;
+}
+.inscrire{
+    color: white;
+    margin-left: 127,5px;
+    font-size: 35px;
+} 
