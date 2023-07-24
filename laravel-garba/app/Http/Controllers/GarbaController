@@ -1,0 +1,112 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Inscrip;
+
+class TestController extends Controller
+{
+    public function afficher_liste()
+    {
+        $inscrip = Inscrip::all();
+        return view('liste', compact('inscrip'));
+    }
+
+
+
+    public function traitement_inscrire(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nom' => 'required',
+           'prenom' => 'required',   
+           'gmail' => 'required|email',
+            'genre' => 'required',
+            'numero' => 'required',
+           'personne' => 'required',
+        ]);
+
+        // Validation passed
+        
+       
+echo 'Verification passed';
+
+ $inscrips = new Inscrip();
+ $inscrips->nom = $request->input('nom');
+ $inscrips->prenom = $request->input('prenom');
+ $inscrips->gmail = $request->input('gmail');
+ $inscrips->genre = $request->input('genre');
+ $inscrips->numero = $request->input('numero');
+ $inscrips->personne = $request->input('personne');
+ $inscrips->save();
+
+ return redirect()->back();
+
+    }
+
+    public function pagina()
+    {
+        $inscrips = inscrip::paginate(2);
+        return view('liste', [
+            'inscrips' => $inscrips,
+        ]);
+    }
+
+
+
+
+
+
+  // function Garba et Chatgpt
+  public function modifier($id)
+  {
+      // Récupérer l'élément à modifier en fonction de l'ID
+      $inscrip = Inscrip::findOrFail($id);
+  
+      // Effectuer les opérations de modification
+  
+      // Rediriger vers une page de succès ou d'affichage des détails
+      return redirect()->route('detail', ['id' => $inscrip->id]);
+  }
+  
+  public function detail($id)
+  {
+   // Récupérer l'élément à afficher en fonction de l'ID
+      $inscrip = Inscrip::findOrFail($id);
+  
+      // Retourner la vue des détails avec les données de l'élément
+      return view('inscrip.detail', ['inscrip' => $inscrip]);
+  }
+  
+  public function supprimer($id)
+  {
+      // Récupérer l'élément à supprimer en fonction de l'ID
+      $inscrip = Inscrip::findOrFail($id);
+  
+      // Effectuer les opérations de suppression
+      $inscrip->delete();
+  
+      // Rediriger vers une page de succès ou une autre action
+      return redirect()->route('index')->with('success', 'L\'élément a été supprimé avec succès.');
+  }
+  
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+}
